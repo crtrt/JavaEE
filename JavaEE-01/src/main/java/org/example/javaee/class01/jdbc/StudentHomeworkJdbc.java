@@ -9,19 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentHomeworkJdbc {
-
-
-
+    /*
+    update操作数据库的方法
+     */
     public static void connectUpdate(String sql){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?serverTimezone=UTC";
-        String driverName = "com.mysql.cj.jdbc.Driver";
-        try {
-            // 加载驱动
-            Class.forName(driverName);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 //插入
                 statement.executeUpdate(sql);
@@ -36,21 +29,11 @@ public class StudentHomeworkJdbc {
      */
     public static List<StudentHomework> selectAll(){
 
-        String url = "jdbc:mysql://127.0.0.1:3306/school?serverTimezone=UTC";
-
-        String driverName = "com.mysql.cj.jdbc.Driver";
-
         String sqlString = "SELECT * FROM s_student_homework";
-        try {
-            // 加载驱动
-            Class.forName(driverName);
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         List<StudentHomework> list = new ArrayList<>();
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -78,22 +61,12 @@ public class StudentHomeworkJdbc {
       查看老师布置的的作业Homework
        */
     public static List<Homework> selectHomework(){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?serverTimezone=UTC";
-
-        String driverName = "com.mysql.cj.jdbc.Driver";
-        try {
-            // 加载驱动
-            Class.forName(driverName);
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
         String sqlString = "SELECT * FROM s_homework";
 
         List<Homework> list = new ArrayList<>();
 
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -119,21 +92,12 @@ public class StudentHomeworkJdbc {
     查看学生列表student
      */
     public static List<Student> selectStudent() {
+
         String sqlString = "SELECT * FROM s_student";
 
-        String url = "jdbc:mysql://127.0.0.1:3306/school?serverTimezone=UTC";
-
-        String driverName = "com.mysql.cj.jdbc.Driver";
-        try {
-            // 加载驱动
-            Class.forName(driverName);
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         List<Student> list = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url, "root", "123456")) {
+
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     // 获取执行结果
@@ -156,20 +120,12 @@ public class StudentHomeworkJdbc {
       查看自已提交的作业
        */
     public static List<StudentHomework> selectMy(Long stuId){
-        String url = "jdbc:mysql://127.0.0.1:3306/school?serverTimezone=UTC";
-
-        String driverName = "com.mysql.cj.jdbc.Driver";
 
         String sqlString = "SELECT * FROM s_student_homework where student_id='" + stuId+ "'";
-        try {
-            // 加载驱动
-            Class.forName(driverName);
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
         List<StudentHomework> list = new ArrayList<>();
-        try(Connection connection =  DriverManager.getConnection(url,"root","123456")) {
+
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果

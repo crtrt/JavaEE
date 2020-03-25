@@ -42,7 +42,7 @@
         String title=request.getParameter("title");
 
         if(null == list || list.size() <= 0){
-            out.print("None data.");
+            out.print("还未提交过作业！");
         }else {
             for (StudentHomework sh : list){
     %>

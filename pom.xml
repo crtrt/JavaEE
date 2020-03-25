@@ -30,6 +30,11 @@
                 <!-- 只在便也和测试时用-->
                 <scope>provided</scope>
             </dependency>
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>3.4.2</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
