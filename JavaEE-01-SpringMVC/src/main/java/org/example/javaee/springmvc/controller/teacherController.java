@@ -4,6 +4,7 @@ import org.example.javaee.springmvc.bean.Beans;
 import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
 import org.example.javaee.springmvc.model.Homework;
 import org.example.javaee.springmvc.model.Student;
+import org.example.javaee.springmvc.model.StudentHomework;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,10 +52,34 @@ public class teacherController {
         sh.setTitle(req.getParameter("title"));
         sh.setContent(req.getParameter("content"));
         sh.setCreateTime(now);
+        sh.setTotal_score(req.getParameter("total_score"));
+
         getStudentHomeworkJdbc().addStudentHomework(sh);
 
         return "/TeacherJSP/addHomework.jsp";
     }
+
+
+    @RequestMapping(value = "SubmitScore",method = RequestMethod.POST)
+    public  String updateHomework(HttpServletRequest req, HttpServletResponse resp){
+        StudentHomework sh = new StudentHomework();
+        //获取当前时间
+        Timestamp now = new Timestamp(new Date().getTime());
+        /**
+         * 赋值
+         */
+        sh.setId(Long.parseLong(req.getParameter("id")));
+        sh.setSetScoreTime(now);
+        sh.setScore(req.getParameter("score"));
+
+        System.out.println(Long.parseLong(req.getParameter("id"))+req.getParameter("score"));
+
+
+        getStudentHomeworkJdbc().submitScore(sh);
+
+        return "/TeacherJSP/readHomework.jsp";
+    }
+
 
 
 

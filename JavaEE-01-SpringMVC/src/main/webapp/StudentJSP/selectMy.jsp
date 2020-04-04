@@ -25,7 +25,7 @@
 <a href="../index.jsp" style="color: #1e704d;float:right">返回首页</a>
 <a href="subHomework.jsp" style="color: #1e704d;float:right;margin-right: 10px">返回上一页</a>
 <form name="form1" action="" method="post" >
-<table style="margin-top: 50px;color:#1e704d;font-family: 宋体; "  align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
+<table style="margin-top: 50px;color:#1e704d;font-family: 宋体; "  align="center" width="1200" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
     <tr align="center" bgcolor="#d5f1e5"  height="40">
         <td>选择</td>
         <td>ID</td>
@@ -36,6 +36,10 @@
         <td>创建时间</td>
         <td>修改时间</td>
         <td>操作</td>
+        <td>总成绩</td>
+        <td>得分</td>
+        <td>批改时间</td>
+
     </tr>
     <%
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
@@ -60,6 +64,10 @@
         <td><%=sh.getCreateTime()%></td>
         <td><%=sh.getUpdateTime()%></td>
         <td><a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">修改</a></td>
+        <td><%=sh.getTotal_score()%></td>
+        <td><%=sh.getScore()%></td>
+        <td><%=sh.getSetScoreTime()%></td>
+
     </tr>
     <%
 

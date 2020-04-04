@@ -56,6 +56,10 @@ public class StudentHomeworkJdbc {
                         sh.setCreateTime(resultSet.getTimestamp("create_time"));
                         sh.setUpdateTime(resultSet.getTimestamp("update_time"));
                         sh.setTotal_score(resultSet.getString("total_score"));
+                        sh.setScore(resultSet.getString("score"));
+                        sh.setSetScoreTime(resultSet.getTimestamp("set_score_time"));
+
+
                         list.add(sh);
                     }
                 }
@@ -86,6 +90,7 @@ public class StudentHomeworkJdbc {
                         hw.setContent(resultSet.getString("content"));
                         hw.setCreateTime(resultSet.getTimestamp("create_time"));
                         hw.setUpdateTime(resultSet.getTimestamp("update_time"));
+                        hw.setTotal_score(resultSet.getString("total_score"));
                         list.add(hw);
                     }
                 }
@@ -147,6 +152,10 @@ public class StudentHomeworkJdbc {
                         sh.setHomeworkContent(resultSet.getString("homework_content"));
                         sh.setCreateTime(resultSet.getTimestamp("create_time"));
                         sh.setUpdateTime(resultSet.getTimestamp("update_time"));
+                        sh.setTotal_score(resultSet.getString("total_score"));
+                        sh.setScore(resultSet.getString("score"));
+                        sh.setSetScoreTime(resultSet.getTimestamp("set_score_time"));
+
                         list.add(sh);
                     }
                 }
@@ -162,7 +171,7 @@ public class StudentHomeworkJdbc {
       */
     public String addStudentHomework(Homework hw){
 
-        String sqlString = "INSERT INTO s_homework(id,title,content,create_time) VALUES (null,'" + hw.getTitle() + "','" + hw.getContent() + "','" + hw.getCreateTime()+ "')";
+        String sqlString = "INSERT INTO s_homework(id,title,content,create_time,total_score) VALUES (null,'" + hw.getTitle() + "','" + hw.getContent() + "','" + hw.getCreateTime()+ "','" + hw.getTotal_score()+"')";
         connectUpdate(sqlString);
         return "添加成功";
     }
@@ -203,5 +212,15 @@ public class StudentHomeworkJdbc {
         connectUpdate(sqlString);
         return "修改成功";
     }
+
+    /*
+  教师提交成绩
+   */
+    public String submitScore(StudentHomework sh) {
+        String sqlString = "update s_student_homework set score='"+sh.getScore()+"',set_score_time='"+sh.getSetScoreTime()+"'where id='"+sh.getId()+ "'";
+        connectUpdate(sqlString);
+        return "修改成功";
+    }
+
 
 }

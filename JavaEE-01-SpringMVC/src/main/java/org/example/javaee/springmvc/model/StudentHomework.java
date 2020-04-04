@@ -21,7 +21,17 @@ public class StudentHomework {
     private String total_score;
 
     private  String score;
-    
+
+    private Date setScoreTime;
+
+    public Date getSetScoreTime() {
+        return setScoreTime;
+    }
+
+    public void setSetScoreTime(Date setScoreTime) {
+        this.setScoreTime = setScoreTime;
+    }
+
     public String getScore() {
         return score;
     }

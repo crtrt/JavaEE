@@ -21,14 +21,15 @@
         <form action="AddHomeworkServlet" method="post" >
                 <p><label style="margin-top: 8px" class="label_input">作业标题</label><input style="margin-top: 8px" type="text" name="title" class="text_field"/></p>
                 <p><label class="label_input">作业内容</label><input type="text" name="content" class="text_field"/></p>
-                <div id="control">
+                <p><label class="label_input">作业总分</label><input type="text" name="total_score" class="text_field"/></p>
+            <div id="control">
                     <input type="submit" id="btn" value="确认添加" />
                 </div>
         </form>
     </div>
 
 
-    <table style="margin-top: 250px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
+    <table style="margin-top: 280px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
         <tr align="center" bgcolor="#d5f1e5" height="40">
             <td>作业编号</td>
             <td>作业标题</td>

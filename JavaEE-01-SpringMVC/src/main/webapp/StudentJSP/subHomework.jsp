@@ -50,7 +50,7 @@
                 <%
                      for (Homework sh : homeworklist){
                  %>
-                <option value="<%=sh.getId()%>">作业<%=sh.getId()%>       题目:<%=sh.getTitle()%>       内容:<%=sh.getContent()%></option>
+                <option value="<%=sh.getId()%>">作业<%=sh.getId()%>       题目:<%=sh.getTitle()%>       内容:<%=sh.getContent()%>         总分:<%=sh.getTotal_score()%></option>
                 <%
                     }
                 %>
