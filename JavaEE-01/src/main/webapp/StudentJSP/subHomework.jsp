@@ -1,8 +1,8 @@
 
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.javaee.class01.model.Homework" %>
-<%@ page import="org.example.javaee.class01.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.class01.model.Student" %>
+<%@ page import="org.example.javaee.springmvc.model.Homework" %>
+<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.javaee.springmvc.model.Student" %>
 
 <%--
   Created by IntelliJ IDEA.

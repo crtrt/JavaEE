@@ -1,7 +1,7 @@
-package org.example.javaee.class01.jdbc;
-import org.example.javaee.class01.model.Student;
-import org.example.javaee.class01.model.Homework;
-import org.example.javaee.class01.model.StudentHomework;
+package org.example.javaee.springmvc.jdbc;
+import org.example.javaee.springmvc.model.Student;
+import org.example.javaee.springmvc.model.Homework;
+import org.example.javaee.springmvc.model.StudentHomework;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package org.example.javaee.class01.servlet;
+package org.example.javaee.springmvc.servlet;
 
-import org.example.javaee.class01.jdbc.StudentHomeworkJdbc;
-import org.example.javaee.class01.model.Student;
+import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
+import org.example.javaee.springmvc.model.Homework;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,23 +13,23 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
-@WebServlet("/AddStudentServlet")
-public class AddStudentServlet extends HttpServlet {
+@WebServlet("/AddStudentHomeworkServlet")
+public class AddStudentHomeworkServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Student sh = new Student();
+        Homework sh = new Homework();
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
          * 赋值
          */
-        sh.setId(Long.parseLong(req.getParameter("id")));
-        sh.setName(req.getParameter("name"));
+        sh.setTitle(req.getParameter("title"));
+        sh.setContent(req.getParameter("content"));
         sh.setCreateTime(now);
-        StudentHomeworkJdbc.addStudent(sh);
+        StudentHomeworkJdbc.addStudentHomework(sh);
         PrintWriter out = resp.getWriter();
-        out.print("<script>alert('Submit successfully!'); window.location='/TeacherJSP/addStudent.jsp' </script>");
+        out.print("<script>alert('Submit successfully!'); window.location='/TeacherJSP/addHomework.jsp' </script>");
 
     }
 }

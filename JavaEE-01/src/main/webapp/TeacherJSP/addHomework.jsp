@@ -1,7 +1,7 @@
 
 <%@ page import="java.util.List" %>
-<%@ page import="org.example.javaee.class01.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.class01.model.Homework" %><%--
+<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.javaee.springmvc.model.Homework" %><%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/8

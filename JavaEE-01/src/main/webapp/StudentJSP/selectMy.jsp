@@ -2,8 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="org.example.javaee.class01.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.class01.model.StudentHomework" %><%--
+<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.javaee.springmvc.model.StudentHomework" %><%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/9
