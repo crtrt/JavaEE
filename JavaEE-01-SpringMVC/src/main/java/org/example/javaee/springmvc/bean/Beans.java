@@ -18,7 +18,7 @@ import java.util.List;
 
 @Configuration
 public class Beans {
-    
+
     @Bean
     public StudentHomeworkJdbc studentHomeworkJdbc(){
         return new StudentHomeworkJdbc();
