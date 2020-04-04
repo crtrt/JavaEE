@@ -4,9 +4,12 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabasePool {
 
-    private static HikariDataSource hikariDataSource;
+    public DatabasePool() {
+    }
 
-    public static HikariDataSource getHikariDataSource(){
+    private HikariDataSource hikariDataSource;
+
+    public HikariDataSource getHikariDataSource(){
 
         if(null != hikariDataSource){
             return hikariDataSource;

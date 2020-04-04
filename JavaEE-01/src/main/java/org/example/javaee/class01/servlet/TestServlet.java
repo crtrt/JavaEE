@@ -1,4 +1,4 @@
-package org.example.javaee.springmvc.servlet;
+package org.example.javaee.class01.servlet;
 
 import javax.servlet.*;
 import java.io.IOException;

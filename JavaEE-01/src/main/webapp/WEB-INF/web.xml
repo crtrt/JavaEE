@@ -7,7 +7,7 @@
 
     <servlet>
         <servlet-name>testServlet</servlet-name>
-        <servlet-class>org.example.javaee.springmvc.servlet.TestServlet</servlet-class>
+        <servlet-class>org.example.javaee.class01.servlet.TestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testServlet</servlet-name>
@@ -16,7 +16,7 @@
 
     <servlet>
         <servlet-name>testServletV2</servlet-name>
-        <servlet-class>org.example.javaee.springmvc.servlet.TestServletV2</servlet-class>
+        <servlet-class>org.example.javaee.class01.servlet.TestServletV2</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testServletV2</servlet-name>

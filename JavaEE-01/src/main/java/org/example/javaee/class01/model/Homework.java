@@ -1,4 +1,4 @@
-package org.example.javaee.springmvc.model;
+package org.example.javaee.class01.model;
 
 import java.util.Date;
 

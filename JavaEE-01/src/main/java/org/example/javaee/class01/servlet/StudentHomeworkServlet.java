@@ -1,7 +1,7 @@
-package org.example.javaee.springmvc.servlet;
+package org.example.javaee.class01.servlet;
 
-import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
-import org.example.javaee.springmvc.model.StudentHomework;
+import org.example.javaee.class01.jdbc.StudentHomeworkJdbc;
+import org.example.javaee.class01.model.StudentHomework;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

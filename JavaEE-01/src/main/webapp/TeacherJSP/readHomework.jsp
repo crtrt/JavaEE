@@ -1,5 +1,5 @@
-<%@ page import="org.example.javaee.springmvc.model.StudentHomework" %>
-<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.javaee.class01.model.StudentHomework" %>
+<%@ page import="org.example.javaee.class01.jdbc.StudentHomeworkJdbc" %>
 <%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: enovo

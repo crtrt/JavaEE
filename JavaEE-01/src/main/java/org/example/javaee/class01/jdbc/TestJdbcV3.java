@@ -1,4 +1,4 @@
-package org.example.javaee.springmvc.jdbc;
+package org.example.javaee.class01.jdbc;
 
 import java.sql.*;
 
