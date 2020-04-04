@@ -3,7 +3,9 @@
 <%@ page import="java.sql.Timestamp" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.springmvc.model.StudentHomework" %><%--
+<%@ page import="org.example.javaee.springmvc.model.StudentHomework" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="org.example.javaee.springmvc.bean.Beans" %><%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/9
@@ -36,8 +38,10 @@
         <td>操作</td>
     </tr>
     <%
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+        StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
 
-        List<StudentHomework> list = StudentHomeworkJdbc.selectMy(Long.parseLong(request.getParameter("student_id")));
+        List<StudentHomework> list = studentHomeworkJdbc.selectMy(Long.parseLong(request.getParameter("student_id")));
 //         List<StudentHomework> list = (List<StudentHomework>) request.getAttribute("list");
         String title=request.getParameter("title");
 

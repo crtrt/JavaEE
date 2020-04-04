@@ -6,9 +6,11 @@
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        https://www.springframework.org/schema/context/spring-context.xsd">
-    <bean id="testBean" class="org.example.javaee.springmvc.bean.TestBean"></bean>
+<!--    <bean id="testBean" class="org.example.javaee.springmvc.bean.JdbcBean"></bean>-->
 
+    <!-- 配置注解方式扫描的包：在指定的包下进行扫描，如果发现类上面有注解，让其装配到容器中 -->
     <context:component-scan base-package="org.example.javaee.springmvc.bean"/>
-    <context:component-scan base-package="org.example.javaee.springmvc.service"/>
-    <context:component-scan base-package="org.example.javaee.springmvc.aspecct"/>
+
+<!--    <context:component-scan base-package="org.example.javaee.springmvc.service"/>-->
+<!--    <context:component-scan base-package="org.example.javaee.springmvc.aspecct"/>-->
 </beans>

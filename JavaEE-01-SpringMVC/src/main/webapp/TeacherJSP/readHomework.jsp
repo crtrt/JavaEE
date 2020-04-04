@@ -1,6 +1,8 @@
 <%@ page import="org.example.javaee.springmvc.model.StudentHomework" %>
 <%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="org.example.javaee.springmvc.bean.Beans" %><%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/8
@@ -29,7 +31,10 @@
 
         </tr>
         <%
-            List<StudentHomework> list = StudentHomeworkJdbc.selectAll();
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+            StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+
+            List<StudentHomework> list = studentHomeworkJdbc.selectAll();
 //         List<StudentHomework> list = (List<StudentHomework>) request.getAttribute("list");
 
             if(null == list || list.size() <= 0){

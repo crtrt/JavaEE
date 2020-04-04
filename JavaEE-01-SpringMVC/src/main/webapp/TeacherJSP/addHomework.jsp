@@ -1,7 +1,9 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.springmvc.model.Homework" %><%--
+<%@ page import="org.example.javaee.springmvc.model.Homework" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="org.example.javaee.springmvc.bean.Beans" %><%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/8
@@ -35,7 +37,10 @@
             <td>总分</td>
         </tr>
         <%
-            List<Homework> list = StudentHomeworkJdbc.selectHomework();
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+            StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+
+            List<Homework> list = studentHomeworkJdbc.selectHomework();
 
             if(null == list || list.size() <= 0){
                 out.print("None data.");

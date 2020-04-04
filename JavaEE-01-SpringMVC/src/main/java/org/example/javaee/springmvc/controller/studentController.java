@@ -1,20 +1,25 @@
 package org.example.javaee.springmvc.controller;
+import org.example.javaee.springmvc.bean.Beans;
 import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
-import org.example.javaee.springmvc.model.Student;
 import org.example.javaee.springmvc.model.StudentHomework;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
 @RequestMapping("/StudentJSP/")
 @Controller
 public class studentController {
+    public StudentHomeworkJdbc getStudentHomeworkJdbc(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+        StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+        return  studentHomeworkJdbc;
+    }
 
     @RequestMapping(value = "SubmitHomeworkServlet",method = RequestMethod.POST)
     public  String addHomework(HttpServletRequest req, HttpServletResponse resp){
@@ -29,7 +34,9 @@ public class studentController {
         sh.setHomeworkTitle(req.getParameter("homework_title"));
         sh.setHomeworkContent(req.getParameter("homework_content"));
         sh.setCreateTime(now);
-        StudentHomeworkJdbc.submitHomework(sh);
+
+
+        getStudentHomeworkJdbc().submitHomework(sh);
         return "/StudentJSP/subHomework.jsp";
     }
 
@@ -48,7 +55,7 @@ public class studentController {
                 if(i!=selectdelete.length-1) ids+=",";
             }
 
-            StudentHomeworkJdbc.deleteHomework(ids);
+            getStudentHomeworkJdbc().deleteHomework(ids);
             return "/StudentJSP/subHomework.jsp";
         }else{
             return "/StudentJSP/subHomework.jsp";
@@ -67,7 +74,7 @@ public class studentController {
         sh.setHomeworkTitle(req.getParameter("title"));
         sh.setHomeworkContent(req.getParameter("content"));
         sh.setUpdateTime(now);
-        StudentHomeworkJdbc.updateHomework(sh);
+        getStudentHomeworkJdbc().updateHomework(sh);
 
         return "/StudentJSP/subHomework.jsp";
     }

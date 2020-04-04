@@ -3,6 +3,8 @@
 <%@ page import="org.example.javaee.springmvc.model.Homework" %>
 <%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
 <%@ page import="org.example.javaee.springmvc.model.Student" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="org.example.javaee.springmvc.bean.Beans" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -25,8 +27,11 @@
 <%--    <form action="../SubmitHomeworkServlet" method="post" >--%>
         <form name="form1" action="" method="post" >
        <%
-           List<Homework> homeworklist = StudentHomeworkJdbc.selectHomework();
-           List<Student> studentlist = StudentHomeworkJdbc.selectStudent();
+           AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+           StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+
+           List<Homework> homeworklist = studentHomeworkJdbc.selectHomework();
+           List<Student> studentlist = studentHomeworkJdbc.selectStudent();
        %>
 
         <p><label style="margin-top: 20px" class="label_input">个人信息</label>

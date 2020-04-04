@@ -2,6 +2,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="org.example.javaee.springmvc.model.Student" %>
 <%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="org.example.javaee.springmvc.bean.Beans" %>
 <%--
   Created by IntelliJ IDEA.
   User: enovo
@@ -34,7 +36,10 @@
             <td>创建时间</td>
         </tr>
         <%
-            List<Student> list = StudentHomeworkJdbc.selectStudent();
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+            StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+
+            List<Student> list = studentHomeworkJdbc.selectStudent();
 
             if(null == list || list.size() <= 0){
                 out.print("None data.");
