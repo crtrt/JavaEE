@@ -24,7 +24,8 @@ public class Beans {
         return new StudentHomeworkJdbc();
     }
 
-    @Bean DatabasePool databasePool(){
+    @Bean
+    public DatabasePool databasePool(){
         return new DatabasePool();
     }
 
