@@ -5,6 +5,7 @@ import org.example.javaee.springmvc.model.StudentHomework;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,26 +22,19 @@ public class studentController {
         return  studentHomeworkJdbc;
     }
 
-    @RequestMapping(value = "SubmitHomeworkServlet",method = RequestMethod.POST)
-    public  String addHomework(HttpServletRequest req, HttpServletResponse resp){
-        StudentHomework sh = new StudentHomework();
+    @RequestMapping(value = "SubmitHomeworkServlet")
+    public  String addHomework(@RequestBody StudentHomework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
          * 赋值
          */
-        sh.setStudentId(Long.parseLong(req.getParameter("student_id")));
-        sh.setHomeworkId(Long.parseLong(req.getParameter("homework_id")));
-        sh.setHomeworkTitle(req.getParameter("homework_title"));
-        sh.setHomeworkContent(req.getParameter("homework_content"));
         sh.setCreateTime(now);
-
-
         getStudentHomeworkJdbc().submitHomework(sh);
         return "/StudentJSP/subHomework.jsp";
     }
 
-    @RequestMapping(value = "deleteServlet",method = RequestMethod.POST)
+    @RequestMapping(value = "deleteServlet")
     public  String delectHomework(HttpServletRequest req, HttpServletResponse resp){
         /**
          * 赋值
@@ -62,24 +56,17 @@ public class studentController {
         }
     }
 
-    @RequestMapping(value = "updateServlet",method = RequestMethod.POST)
-    public  String updateHomework(HttpServletRequest req, HttpServletResponse resp){
-        StudentHomework sh = new StudentHomework();
+    @RequestMapping(value = "updateServlet")
+    public  String updateHomework(@RequestBody StudentHomework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
          * 赋值
          */
-        sh.setId(Long.parseLong(req.getParameter("id")));
-        sh.setHomeworkTitle(req.getParameter("title"));
-        sh.setHomeworkContent(req.getParameter("content"));
         sh.setUpdateTime(now);
         getStudentHomeworkJdbc().updateHomework(sh);
 
         return "/StudentJSP/subHomework.jsp";
     }
-
-
-
 
 }

@@ -1,15 +1,14 @@
 package org.example.javaee.springmvc.jdbc;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DatabasePool {
 
-    public DatabasePool() {
-    }
+    private static HikariDataSource hikariDataSource;
 
-    private HikariDataSource hikariDataSource;
-
-    public HikariDataSource getHikariDataSource(){
+    public static HikariDataSource getHikariDataSource(){
 
         if(null != hikariDataSource){
             return hikariDataSource;

@@ -3,27 +3,25 @@ import org.example.javaee.springmvc.bean.Beans;
 import org.example.javaee.springmvc.model.Student;
 import org.example.javaee.springmvc.model.Homework;
 import org.example.javaee.springmvc.model.StudentHomework;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 public class StudentHomeworkJdbc {
-    public StudentHomeworkJdbc() {
-    }
 
-    public DatabasePool getDatabasePool(){
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
-        DatabasePool databasePool=(DatabasePool) context.getBean("databasePool");
-        return  databasePool;
+    public StudentHomeworkJdbc(){
+
     }
     /*
         update操作数据库的方法
          */
     public void connectUpdate(String sql){
 
-        try(Connection connection = getDatabasePool().getHikariDataSource().getConnection()) {
+        try(Connection connection =DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 //插入
                 statement.executeUpdate(sql);
@@ -42,7 +40,7 @@ public class StudentHomeworkJdbc {
 
         List<StudentHomework> list = new ArrayList<>();
 
-        try(Connection connection = getDatabasePool().getHikariDataSource().getConnection()) {
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -79,7 +77,7 @@ public class StudentHomeworkJdbc {
 
         List<Homework> list = new ArrayList<>();
 
-        try(Connection connection = getDatabasePool().getHikariDataSource().getConnection()) {
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -111,7 +109,7 @@ public class StudentHomeworkJdbc {
 
         List<Student> list = new ArrayList<>();
 
-        try(Connection connection = getDatabasePool().getHikariDataSource().getConnection()) {
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     // 获取执行结果
@@ -139,7 +137,7 @@ public class StudentHomeworkJdbc {
 
         List<StudentHomework> list = new ArrayList<>();
 
-        try(Connection connection = getDatabasePool().getHikariDataSource().getConnection()) {
+        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果

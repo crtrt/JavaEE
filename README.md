@@ -39,3 +39,7 @@ JDBC操作类注册为bean
  ![Image text](JavaEE-01-SpringMVC/src/main/webapp/screenshot/教师查看成绩.png)
 教师打分：
  ![Image text](JavaEE-01-SpringMVC/src/main/webapp/screenshot/教师打分.png)
+### 4.10修改
+1.之前将DatabasePool注册为bean，用ioc管理，代码比较冗余，所以就决定还是使用静态类。
+2.学习了@Autowired 注释，它可以对类成员变量、方法及构造函数进行标注，完成自动装配的工作。但是为了保留ioc容器管理，就没有使用。
+3.RequestMapping代码较为冗余，修改为RequestBody

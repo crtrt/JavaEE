@@ -7,6 +7,7 @@ import org.example.javaee.springmvc.model.Student;
 import org.example.javaee.springmvc.model.StudentHomework;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -25,63 +26,45 @@ public class teacherController {
         return  studentHomeworkJdbc;
     }
 
-    @RequestMapping(value = "AddStudentServlet",method = RequestMethod.POST)
-    public  String addStudent(HttpServletRequest req, HttpServletResponse resp){
-        Student sh = new Student();
+    @RequestMapping(value = "AddStudentServlet")
+    public  String addStudent(@RequestBody Student sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
          * 赋值
          */
-        sh.setId(Long.parseLong(req.getParameter("id")));
-        sh.setName(req.getParameter("name"));
         sh.setCreateTime(now);
         getStudentHomeworkJdbc().addStudent(sh);
         return "/TeacherJSP/addStudent.jsp";
     }
 
-    @RequestMapping(value = "AddHomeworkServlet",method = RequestMethod.POST)
-    public  String addHomework(HttpServletRequest req, HttpServletResponse resp){
-
-        Homework sh = new Homework();
+    @RequestMapping(value = "AddHomeworkServlet")
+    public  String addHomework(@RequestBody Homework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
          * 赋值
          */
-        sh.setTitle(req.getParameter("title"));
-        sh.setContent(req.getParameter("content"));
         sh.setCreateTime(now);
-        sh.setTotal_score(req.getParameter("total_score"));
-
         getStudentHomeworkJdbc().addStudentHomework(sh);
 
         return "/TeacherJSP/addHomework.jsp";
     }
 
 
-    @RequestMapping(value = "SubmitScore",method = RequestMethod.POST)
-    public  String updateHomework(HttpServletRequest req, HttpServletResponse resp){
-        StudentHomework sh = new StudentHomework();
+    @RequestMapping(value = "SubmitScore")
+    public  String updateHomework(@RequestBody StudentHomework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
          * 赋值
          */
-        sh.setId(Long.parseLong(req.getParameter("id")));
         sh.setSetScoreTime(now);
-        sh.setScore(req.getParameter("score"));
-
-        System.out.println(Long.parseLong(req.getParameter("id"))+req.getParameter("score"));
-
 
         getStudentHomeworkJdbc().submitScore(sh);
 
         return "/TeacherJSP/readHomework.jsp";
     }
-
-
-
 
 
 }
