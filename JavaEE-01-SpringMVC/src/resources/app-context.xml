@@ -13,4 +13,6 @@
 
 <!--    <context:component-scan base-package="org.example.javaee.springmvc.service"/>-->
 <!--    <context:component-scan base-package="org.example.javaee.springmvc.aspecct"/>-->
+    <context:component-scan base-package="org.example.javaee.springmvc.aspect"/>
+
 </beans>

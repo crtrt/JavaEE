@@ -2,7 +2,9 @@ package org.example.javaee.springmvc.controller;
 import org.example.javaee.springmvc.bean.Beans;
 import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
 import org.example.javaee.springmvc.model.StudentHomework;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,12 +17,10 @@ import java.util.Date;
 
 @RequestMapping("/StudentJSP/")
 @Controller
+@EnableAspectJAutoProxy
 public class studentController {
-    public StudentHomeworkJdbc getStudentHomeworkJdbc(){
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
-        StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
-        return  studentHomeworkJdbc;
-    }
+    @Autowired
+    private StudentHomeworkJdbc studentHomeworkJdbc;
 
     @RequestMapping(value = "SubmitHomeworkServlet")
     public  String addHomework(@RequestBody StudentHomework sh){
@@ -30,7 +30,7 @@ public class studentController {
          * 赋值
          */
         sh.setCreateTime(now);
-        getStudentHomeworkJdbc().submitHomework(sh);
+        studentHomeworkJdbc.submitHomework(sh);
         return "/StudentJSP/subHomework.jsp";
     }
 
@@ -49,7 +49,7 @@ public class studentController {
                 if(i!=selectdelete.length-1) ids+=",";
             }
 
-            getStudentHomeworkJdbc().deleteHomework(ids);
+            studentHomeworkJdbc.deleteHomework(ids);
             return "/StudentJSP/subHomework.jsp";
         }else{
             return "/StudentJSP/subHomework.jsp";
@@ -64,7 +64,7 @@ public class studentController {
          * 赋值
          */
         sh.setUpdateTime(now);
-        getStudentHomeworkJdbc().updateHomework(sh);
+        studentHomeworkJdbc.updateHomework(sh);
 
         return "/StudentJSP/subHomework.jsp";
     }

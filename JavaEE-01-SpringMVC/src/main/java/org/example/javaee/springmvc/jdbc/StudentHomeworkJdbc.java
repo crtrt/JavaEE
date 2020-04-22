@@ -6,11 +6,13 @@ import org.example.javaee.springmvc.model.StudentHomework;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+@EnableAspectJAutoProxy
 public class StudentHomeworkJdbc {
 
     public StudentHomeworkJdbc(){

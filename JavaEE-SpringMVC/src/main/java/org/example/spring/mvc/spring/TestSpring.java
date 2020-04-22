@@ -1,15 +1,11 @@
 package org.example.spring.mvc.spring;
 
-import org.example.spring.mvc.bean.TestBean;
+import org.example.spring.mvc.aspect.TestAspect;
 import org.example.spring.mvc.service.JdbcService;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import java.lang.annotation.Annotation;
-//@ComponentScan("org.example.spring.mvc.*")
-
+@ComponentScan("org.example.spring.mvc.*")
+@EnableAspectJAutoProxy
 public class TestSpring {
     public static void main(String[] args){
 
@@ -18,7 +14,15 @@ public class TestSpring {
         //2
 //        ApplicationContext context = new FileSystemXmlApplicationContext("JavaEE-SpringMVC/src/resources/app-context.xml");
 
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestBean.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TestSpring.class);
+
+        TestAspect testAspect=context.getBean("testAspect", TestAspect.class);
+
+        System.out.println(testAspect.toString());
+
+        JdbcService jdbcService=context.getBean("jdbcService", JdbcService.class);
+
+        jdbcService.getById(10L);
 
 //        context.scan("org.example.spring.mvc.service.*");
 
@@ -30,10 +34,10 @@ public class TestSpring {
 //        while (n-->=0){
 
             //getById
-           TestBean service = context.getBean("testBean2",TestBean.class);
+//           TestBean service = context.getBean("testBean2",TestBean.class);
             //getByName
 //            TestBean service=(TestBean) context.getBean("testBean2");
-            System.out.println(service.toString());
+//            System.out.println(service.toString());
         //    输出 org.example.spring.mvc.bean.TestBean@2cd76f31
 
 //

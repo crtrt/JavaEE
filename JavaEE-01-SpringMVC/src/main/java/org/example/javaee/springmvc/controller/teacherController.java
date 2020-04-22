@@ -5,7 +5,9 @@ import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
 import org.example.javaee.springmvc.model.Homework;
 import org.example.javaee.springmvc.model.Student;
 import org.example.javaee.springmvc.model.StudentHomework;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,13 +20,11 @@ import java.util.Date;
 
 @RequestMapping("/TeacherJSP/")
 @Controller
+@EnableAspectJAutoProxy
 public class teacherController {
 
-    public StudentHomeworkJdbc getStudentHomeworkJdbc(){
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
-        StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
-        return  studentHomeworkJdbc;
-    }
+    @Autowired
+    private StudentHomeworkJdbc studentHomeworkJdbc;
 
     @RequestMapping(value = "AddStudentServlet")
     public  String addStudent(@RequestBody Student sh){
@@ -34,7 +34,7 @@ public class teacherController {
          * 赋值
          */
         sh.setCreateTime(now);
-        getStudentHomeworkJdbc().addStudent(sh);
+        studentHomeworkJdbc.addStudent(sh);
         return "/TeacherJSP/addStudent.jsp";
     }
 
@@ -46,7 +46,7 @@ public class teacherController {
          * 赋值
          */
         sh.setCreateTime(now);
-        getStudentHomeworkJdbc().addStudentHomework(sh);
+        studentHomeworkJdbc.addStudentHomework(sh);
 
         return "/TeacherJSP/addHomework.jsp";
     }
@@ -61,7 +61,7 @@ public class teacherController {
          */
         sh.setSetScoreTime(now);
 
-        getStudentHomeworkJdbc().submitScore(sh);
+        studentHomeworkJdbc.submitScore(sh);
 
         return "/TeacherJSP/readHomework.jsp";
     }

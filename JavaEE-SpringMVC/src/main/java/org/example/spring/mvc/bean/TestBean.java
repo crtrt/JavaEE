@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 public class TestBean {
     private  Long id;
+    String Test;
 
     private String name;
 
