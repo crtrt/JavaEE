@@ -13,19 +13,19 @@
 
 <%
     String id=request.getParameter("id");
-    String stuId=request.getParameter("stuId");
-    String hmwTitle=request.getParameter("hmwTitle");
-    String hmwId=request.getParameter("hmwId");
-    String hmwContent=request.getParameter("hmwContent");
+    String stuId=request.getParameter("studentId");
+    String hmwTitle=request.getParameter("homeworkTitle");
+    String hmwId=request.getParameter("homeworkId");
+    String hmwContent=request.getParameter("homeworkContent");
 
 %>
 <div class="frame" >
     <form action="updateServlet" method="post" >
         <p><label style="margin-top: 20px" class="label_input">*编号</label><input style="margin-top: 20px" type="text"readOnly="true" name="id" class="text_field1" value=<%=id%>></p>
-        <p><label class="label_input">*学生学号</label><input type="text" readOnly="true" name="stuId" class="text_field1" value=<%=stuId%>></p>
-        <p><label class="label_input">*作业编号</label><input type="text"readOnly="true" name="hmwId" class="text_field1" value=<%=hmwId%>></p>
-        <p><label class="label_input">作业标题</label><input type="text" name="title" class="text_field" value=<%=hmwTitle%>></p>
-        <p><label class="label_input">作业内容</label><input type="text" name="content" class="text_field " value=<%=hmwContent%>></p>
+        <p><label class="label_input">*学生学号</label><input type="text" readOnly="true" name="studentId" class="text_field1" value=<%=stuId%>></p>
+        <p><label class="label_input">*作业编号</label><input type="text"readOnly="true" name="homeworkId" class="text_field1" value=<%=hmwId%>></p>
+        <p><label class="label_input">作业标题</label><input type="text" name="homeworkTitle" class="text_field" value=<%=hmwTitle%>></p>
+        <p><label class="label_input">作业内容</label><input type="text" name="homeworkContent" class="text_field " value=<%=hmwContent%>></p>
         <div id="control">
             <input style="margin-top: 20px" type="submit" id="btn" value="确认" />
         </div>

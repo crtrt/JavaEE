@@ -18,7 +18,7 @@
     <title>我的作业</title>
 </head>
 <body>
-<%String username=request.getParameter("student_id");%>
+<%String username=request.getParameter("studentId");%>
 <%
     out.print("当前学号:"+username);
 %>
@@ -45,7 +45,7 @@
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
         StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
 
-        List<StudentHomework> list = studentHomeworkJdbc.selectMy(Long.parseLong(request.getParameter("student_id")));
+        List<StudentHomework> list = studentHomeworkJdbc.selectMy(Long.parseLong(request.getParameter("studentId")));
 //         List<StudentHomework> list = (List<StudentHomework>) request.getAttribute("list");
         String title=request.getParameter("title");
 
@@ -63,7 +63,7 @@
         <td><%=sh.getHomeworkContent()%></td>
         <td><%=sh.getCreateTime()%></td>
         <td><%=sh.getUpdateTime()%></td>
-        <td><a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">修改</a></td>
+        <td><a href="update.jsp?id=<%=sh.getId()%>&studentId=<%=sh.getStudentId()%>&homeworkId=<%=sh.getHomeworkId()%>&homeworkTitle=<%=sh.getHomeworkTitle()%>&homeworkContent=<%=sh.getHomeworkContent()%>">修改</a></td>
         <td><%=sh.getTotal_score()%></td>
         <td><%=sh.getScore()%></td>
         <td><%=sh.getSetScoreTime()%></td>

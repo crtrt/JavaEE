@@ -35,7 +35,7 @@
        %>
 
         <p><label style="margin-top: 20px" class="label_input">个人信息</label>
-            <select id="student_id" name="student_id" style="margin-top: 20px" class="select">
+            <select id="studentId" name="studentId" style="margin-top: 20px" class="select">
                 <%
                     for (Student sh : studentlist){
                 %>
@@ -46,7 +46,7 @@
             </select>
         </p>
         <p><label style="margin-top: 20px" class="label_input">选择作业</label>
-            <select  name="homework_id" style="margin-top: 20px" class="select">
+            <select  name="homeworkId" style="margin-top: 20px" class="select">
                 <%
                      for (Homework sh : homeworklist){
                  %>
@@ -58,8 +58,8 @@
         </p>
 
 
-        <p><label style="margin-top: 20px" class="label_input">作业标题</label><input style="margin-top: 20px" type="text" name="homework_title" class="text_field"/></p>
-        <p><label style="margin-top: 20px" class="label_input">作业内容</label><input style="margin-top: 20px" type="text" name="homework_content" class="text_field"/></p>
+        <p><label style="margin-top: 20px" class="label_input">作业标题</label><input style="margin-top: 20px" type="text" name="homeworkTitle" class="text_field"/></p>
+        <p><label style="margin-top: 20px" class="label_input">作业内容</label><input style="margin-top: 20px" type="text" name="homeworkContent" class="text_field"/></p>
         <div id="control" >
 <%--            <input style="margin-top: 20px" type="submit" id="btn" value="确认" />--%>
             <input style="margin-top: 20px" class="btn" type="button" value="确认提交" type="submit" onclick="form1.action='SubmitHomeworkServlet';form1.submit();"/>

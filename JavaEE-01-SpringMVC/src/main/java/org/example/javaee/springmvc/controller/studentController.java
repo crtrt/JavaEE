@@ -1,13 +1,14 @@
 package org.example.javaee.springmvc.controller;
+
 import org.example.javaee.springmvc.bean.Beans;
 import org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc;
 import org.example.javaee.springmvc.model.StudentHomework;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +18,13 @@ import java.util.Date;
 
 @RequestMapping("/StudentJSP/")
 @Controller
-@EnableAspectJAutoProxy
 public class studentController {
+    //通过注入
     @Autowired
     private StudentHomeworkJdbc studentHomeworkJdbc;
 
-    @RequestMapping(value = "SubmitHomeworkServlet")
-    public  String addHomework(@RequestBody StudentHomework sh){
+    @RequestMapping(value = "SubmitHomeworkServlet",method = RequestMethod.POST)
+    public  String addHomework(@ModelAttribute  StudentHomework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**
@@ -56,8 +57,8 @@ public class studentController {
         }
     }
 
-    @RequestMapping(value = "updateServlet")
-    public  String updateHomework(@RequestBody StudentHomework sh){
+    @RequestMapping(value = "updateServlet",method = RequestMethod.POST)
+    public  String updateHomework(@ModelAttribute StudentHomework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
         /**

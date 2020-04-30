@@ -1,50 +1,47 @@
 package org.example.javaee.springmvc.jdbc;
-import org.example.javaee.springmvc.bean.Beans;
+import org.example.javaee.springmvc.bean.TransManager;
 import org.example.javaee.springmvc.model.Student;
 import org.example.javaee.springmvc.model.Homework;
 import org.example.javaee.springmvc.model.StudentHomework;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Service;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-@EnableAspectJAutoProxy
+@Service
 public class StudentHomeworkJdbc {
 
     public StudentHomeworkJdbc(){
-
     }
     /*
         update操作数据库的方法
          */
-    public void connectUpdate(String sql){
+    public void connectUpdate(String sql,String key){
 
-        try(Connection connection =DatabasePool.getHikariDataSource().getConnection()) {
+            Connection connection=TransManager.getConnection(key);
             try(Statement statement = connection.createStatement()){
                 //插入
                 statement.executeUpdate(sql);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            }catch(Exception e){
+                e.printStackTrace();
         }
     }
 
     /*
     查看所有提交的作业
      */
-    public List<StudentHomework> selectAll(){
 
+    public List<StudentHomework> selectAll(){
         String sqlString = "SELECT * FROM s_student_homework";
 
         List<StudentHomework> list = new ArrayList<>();
 
-        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
+        Connection connection=TransManager.getConnection("selectAll");
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
+
                     // 获取执行结果
                     while (resultSet.next()){
                         StudentHomework sh = new StudentHomework();
@@ -59,15 +56,12 @@ public class StudentHomeworkJdbc {
                         sh.setScore(resultSet.getString("score"));
                         sh.setSetScoreTime(resultSet.getTimestamp("set_score_time"));
 
-
                         list.add(sh);
                     }
                 }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return list;
     }
     /*
@@ -79,7 +73,7 @@ public class StudentHomeworkJdbc {
 
         List<Homework> list = new ArrayList<>();
 
-        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
+        Connection connection=TransManager.getConnection("selectHomework");
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -93,8 +87,8 @@ public class StudentHomeworkJdbc {
                         hw.setTotal_score(resultSet.getString("total_score"));
                         list.add(hw);
                     }
+
                 }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -111,7 +105,7 @@ public class StudentHomeworkJdbc {
 
         List<Student> list = new ArrayList<>();
 
-        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
+        Connection connection=TransManager.getConnection("selectStudent");
             try (Statement statement = connection.createStatement()) {
                 try (ResultSet resultSet = statement.executeQuery(sqlString)) {
                     // 获取执行结果
@@ -123,7 +117,6 @@ public class StudentHomeworkJdbc {
                         list.add(sh);
                     }
                 }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -139,7 +132,7 @@ public class StudentHomeworkJdbc {
 
         List<StudentHomework> list = new ArrayList<>();
 
-        try(Connection connection = DatabasePool.getHikariDataSource().getConnection()) {
+        Connection connection=TransManager.getConnection("selectMy");
             try(Statement statement = connection.createStatement()){
                 try(ResultSet resultSet = statement.executeQuery(sqlString)){
                     // 获取执行结果
@@ -159,7 +152,6 @@ public class StudentHomeworkJdbc {
                         list.add(sh);
                     }
                 }
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -172,7 +164,7 @@ public class StudentHomeworkJdbc {
     public String addStudentHomework(Homework hw){
 
         String sqlString = "INSERT INTO s_homework(id,title,content,create_time,total_score) VALUES (null,'" + hw.getTitle() + "','" + hw.getContent() + "','" + hw.getCreateTime()+ "','" + hw.getTotal_score()+"')";
-        connectUpdate(sqlString);
+        connectUpdate(sqlString,"addStudentHomework");
         return "添加成功";
     }
     /*
@@ -181,7 +173,7 @@ public class StudentHomeworkJdbc {
     public String addStudent(Student sh){
 
         String sqlString = "INSERT INTO s_student(id,name,create_time) VALUES ('" + sh.getId() + "','" + sh.getName() + "','" + sh.getCreateTime()+ "')";
-        connectUpdate(sqlString);
+        connectUpdate(sqlString,"addStudent");
         return "添加成功";
     }
     /*
@@ -192,7 +184,7 @@ public class StudentHomeworkJdbc {
         String sqlString = "INSERT INTO s_student_homework(id,student_id,homework_id,homework_title,homework_content,create_time) VALUES" +
                 "(null,'" + sh.getStudentId() + "','" + sh.getHomeworkId() + "','"
                 + sh.getHomeworkTitle() + "','" + sh.getHomeworkContent() + "','" + sh.getCreateTime() + "')";
-        connectUpdate(sqlString);
+        connectUpdate(sqlString,"submitHomework");
         return "提交成功";
     }
     /*
@@ -201,7 +193,7 @@ public class StudentHomeworkJdbc {
 
     public  String deleteHomework(String ids) {
         String sqlString = "delete from s_student_homework where id in ("+ids+")";
-        connectUpdate(sqlString);
+        connectUpdate(sqlString,"deleteHomework");
         return "删除成功";
     }
     /*
@@ -209,7 +201,7 @@ public class StudentHomeworkJdbc {
      */
     public String updateHomework(StudentHomework sh) {
         String sqlString = "update s_student_homework set homework_title='"+sh.getHomeworkTitle()+"',homework_content='"+sh.getHomeworkContent()+"',update_time='"+sh.getUpdateTime()+"'where id='"+sh.getId()+ "'";
-        connectUpdate(sqlString);
+        connectUpdate(sqlString,"updateHomework");
         return "修改成功";
     }
 
@@ -218,7 +210,7 @@ public class StudentHomeworkJdbc {
    */
     public String submitScore(StudentHomework sh) {
         String sqlString = "update s_student_homework set score='"+sh.getScore()+"',set_score_time='"+sh.getSetScoreTime()+"'where id='"+sh.getId()+ "'";
-        connectUpdate(sqlString);
+        connectUpdate(sqlString,"submitScore");
         return "修改成功";
     }
 
