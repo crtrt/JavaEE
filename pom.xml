@@ -11,11 +11,11 @@
 
     <modules>
         <module>JavaEE-01</module>
-        <module>JavaEE-02</module>
         <module>core</module>
         <module>db</module>
         <module>JavaEE-SpringMVC</module>
         <module>JavaEE-01-SpringMVC</module>
+        <module>Spring-cloud</module>
     </modules>
 
     <dependencyManagement>
@@ -60,6 +60,12 @@
                 <artifactId>aopalliance</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>1.7.30</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
