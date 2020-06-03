@@ -15,7 +15,7 @@
         <module>db</module>
         <module>JavaEE-SpringMVC</module>
         <module>JavaEE-01-SpringMVC</module>
-        <module>Spring-cloud</module>
+        <module>SpringBoot-mybatis</module>
     </modules>
 
     <dependencyManagement>
