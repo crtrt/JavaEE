@@ -3,12 +3,6 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
 
-
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-
-
   <!-- 配置字符编码过滤器  必须配置在所有过滤器的最前面 -->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
@@ -28,11 +22,6 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
-
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:app-context.xml</param-value>
-  </context-param>
 
 
   <!--  springmvc 主要用servlet
