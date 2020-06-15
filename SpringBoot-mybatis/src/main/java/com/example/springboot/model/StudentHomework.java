@@ -15,13 +15,13 @@ import java.util.Date;
 public class StudentHomework {
     private Long id;
 
-    private Long studentId;
+    private Long student_id;
 
-    private Long homeworkId;
+    private Long homework_id;
 
-    private String homeworkTitle;
+    private String homework_title;
 
-    private String homeworkContent;
+    private String homework_content;
 
     private String total_score;
 
@@ -29,10 +29,10 @@ public class StudentHomework {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:SS")
 
-    private Date createTime;
+    private Date create_time;
 
-    private Date updateTime;
+    private Date update_time;
 
-    private Date setScoreTime;
+    private Date set_score_time;
 
 }

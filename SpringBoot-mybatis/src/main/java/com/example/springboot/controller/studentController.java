@@ -38,7 +38,7 @@ public class studentController {
         /**
          * 赋值
          */
-        studentHomework.setCreateTime(now);
+        studentHomework.setCreate_time(now);
         studentHomeworkService.submitHomework(studentHomework);
         return null;
     }

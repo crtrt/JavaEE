@@ -52,7 +52,7 @@ public class teacherController {
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
 
-        sh.setCreateTime(now);
+        sh.setCreate_time(now);
 
         studentService.addStudent(sh);
 
@@ -70,7 +70,7 @@ public class teacherController {
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
 
-        sh.setCreateTime(now);
+        sh.setCreate_time(now);
 
         homeworkService.addStudentHomework(sh);
 
@@ -111,8 +111,10 @@ public class teacherController {
 //    }
     @RequestMapping("/readHomework")
     public String student(Model model) {
-        System.out.println("???????????");
+
         List<StudentHomework> list = studentHomeworkService.selectAll();
+        System.out.println("???????????");
+        System.out.println(list);
         model.addAttribute("list",list);
         return "/readHomework";
     }

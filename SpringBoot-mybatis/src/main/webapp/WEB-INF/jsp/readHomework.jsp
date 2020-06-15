@@ -38,15 +38,15 @@
     <c:forEach items="${list}" var="sh">
         <tr align="center" bgcolor="white" height="30">
             <td>${sh.id}</td>
-            <td>${sh.studentId}</td>
-            <td>${sh.homeworkId}</td>
-            <td>${sh.homeworkTitle}</td>
-            <td>${sh.homeworkContent}</td>
-            <td>${sh.createTime}</td>
-            <td>${sh.updateTime}</td>
+            <td>${sh.student_id}</td>
+            <td>${sh.homework_id}</td>
+            <td>${sh.homework_title}</td>
+            <td>${sh.homework_content}</td>
+            <td>${sh.create_time}</td>
+            <td>${sh.update_time}</td>
             <td>${sh.total_score}</td>
             <td>${sh.score}</td>
-            <td>${sh.setScoreTime}</td>
+            <td>${sh.set_score_time}</td>
             <td>
 <%--                <a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">打分</a>--%>
 <%--                <a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">修改</a>--%>

@@ -54,7 +54,7 @@
   }
 
   #t_btn_login {
-    margin-top: 60px;
+    margin-top: 20px;
     font-size: 16px;
     font-family: 宋体;
     width: 120px;
@@ -71,7 +71,7 @@
   }
 
   #s_btn_login{
-    margin-top: 60px;
+    margin-top: 20px;
     font-size: 16px;
     font-family: 宋体;
     width: 120px;
