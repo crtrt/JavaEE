@@ -36,7 +36,7 @@
 </html>
 <style>
     body {
-        background-image: url("../images/2.jpg");
+        background-image: url("../../images/2.jpg");
         background-size: 100%;
         background-repeat: no-repeat;
         font-family: 宋体;

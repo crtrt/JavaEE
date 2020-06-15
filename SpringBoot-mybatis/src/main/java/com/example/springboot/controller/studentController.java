@@ -1,30 +1,23 @@
 package com.example.springboot.controller;
-
-
-import com.example.springboot.db.model.StudentHomework;
-import com.example.springboot.db.service.StudentHomeworkService;
-
+import com.example.springboot.model.StudentHomework;
+import com.example.springboot.service.StudentHomeworkService;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 
-@RequestMapping("/StudentJSP/")
-@RestController
+
+
+@Controller
 public class studentController {
-
+    @Autowired
     private final StudentHomeworkService studentHomeworkService;
 
 

@@ -22,7 +22,7 @@
 <%
     out.print("当前学号:"+username);
 %>
-<a href="../index.jsp" style="color: #1e704d;float:right">返回首页</a>
+<a href="../../index.jsp" style="color: #1e704d;float:right">返回首页</a>
 <a href="subHomework.jsp" style="color: #1e704d;float:right;margin-right: 10px">返回上一页</a>
 <form name="form1" action="" method="post" >
 <table style="margin-top: 50px;color:#1e704d;font-family: 宋体; "  align="center" width="1200" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
@@ -86,7 +86,7 @@
 </html>
 <style>
     body {
-        background-image: url("../images/1.jpg");
+        background-image: url("../../images/1.jpg");
         background-size: 100%;
         background-repeat: no-repeat;
         font-family: 宋体;

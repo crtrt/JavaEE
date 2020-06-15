@@ -22,7 +22,7 @@
     %>
 </head>
 <body>
-<a href="../index.jsp" style="color: #1e704d;float:right">返回首页</a>
+<a href="../../index.jsp" style="color: #1e704d;float:right">返回首页</a>
 <div id="frame">
 <%--    <form action="../SubmitHomeworkServlet" method="post" >--%>
         <form name="form1" action="" method="post" >
@@ -76,7 +76,7 @@
 
 <style>
 body {
-    background-image: url("../images/1.jpg");
+    background-image: url("../../images/1.jpg");
     background-size: 100%;
     background-repeat: no-repeat;
     font-family: 宋体;

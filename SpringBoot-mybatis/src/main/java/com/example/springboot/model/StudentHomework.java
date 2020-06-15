@@ -1,4 +1,4 @@
-package com.example.springboot.db.model;
+package com.example.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;

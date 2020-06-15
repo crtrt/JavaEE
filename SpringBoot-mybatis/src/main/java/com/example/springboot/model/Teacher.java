@@ -1,11 +1,12 @@
-package com.example.springboot.db.model;
+package com.example.springboot.model;
 
 import lombok.Data;
+
 import java.util.Date;
 
 
 @Data
-public class Student {
+public class Teacher {
     private Long id;
 
     private String name;
@@ -13,5 +14,7 @@ public class Student {
     private Date createTime;
 
     private Date updateTime;
+
+    private String psw;
 
 }

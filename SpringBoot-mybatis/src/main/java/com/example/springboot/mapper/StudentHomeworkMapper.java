@@ -1,18 +1,17 @@
-package com.example.springboot.db.mapper;
+package com.example.springboot.mapper;
 
-import com.example.springboot.db.model.StudentHomework;
+import com.example.springboot.model.StudentHomework;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 /*
 操作model
  */
+@Mapper
 public interface StudentHomeworkMapper  {
-
-
 
     @Insert("insert into student_homework(homeworkId,studentId,homeworkTitle,homeworkContent,submitDate) " +
             "values (#{homeworkId},#{studentId},#{homeworkTitle},#{homeworkContent},#{submitDate})")
@@ -22,7 +21,7 @@ public interface StudentHomeworkMapper  {
     查看所有提交的作业
      */
     @Select("SELECT * FROM s_student_homework")
-    public List<StudentHomework> selectAll();
+    List<StudentHomework> selectAll();
 
     /*
     查看自已提交的作业

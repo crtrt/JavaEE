@@ -1,7 +1,7 @@
 
 <%@ page import="java.util.List" %>
-<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
-<%@ page import="com.example.springboot.db.model.StudentHomework" %>
+<%@ page import="com.example.springboot.model.StudentHomework" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -34,41 +34,27 @@
             <td>操作</td>
 
         </tr>
-        <%
 
-           List<StudentHomework> list = (List<StudentHomework>) request.getAttribute("list");
-
-            if(null == list || list.size() <= 0){
-                out.print("None data.");
-            }else {
-                for (StudentHomework sh : list){
-        %>
+    <c:forEach items="${list}" var="sh">
         <tr align="center" bgcolor="white" height="30">
-            <td><%=sh.getId()%></td>
-            <td><%=sh.getStudentId()%></td>
-            <td><%=sh.getHomeworkId()%></td>
-            <td><%=sh.getHomeworkTitle()%></td>
-            <td><%=sh.getHomeworkContent()%></td>
-            <td><%=sh.getCreateTime()%></td>
-            <td><%=sh.getUpdateTime()%></td>
-            <td><%=sh.getTotal_score()%></td>
-            <td><%=sh.getScore()%></td>
-            <td><%=sh.getSetScoreTime()%></td>
+            <td>${sh.id}</td>
+            <td>${sh.studentId}</td>
+            <td>${sh.homeworkId}</td>
+            <td>${sh.homeworkTitle}</td>
+            <td>${sh.homeworkContent}</td>
+            <td>${sh.createTime}</td>
+            <td>${sh.updateTime}</td>
+            <td>${sh.total_score}</td>
+            <td>${sh.score}</td>
+            <td>${sh.setScoreTime}</td>
             <td>
 <%--                <a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">打分</a>--%>
 <%--                <a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">修改</a>--%>
 <%--                <a href="update.jsp?id=<%=sh.getId()%>&stuId=<%=sh.getStudentId()%>&hmwId=<%=sh.getHomeworkId()%>&hmwTitle=<%=sh.getHomeworkTitle()%>&hmwContent=<%=sh.getHomeworkContent()%>">删除</a>--%>
-                <input type="button" value="打分" onclick="openPopup(<%=sh.getId()%>)">
-
-
+                <input type="button" value="打分" onclick="openPopup(${sh.id})">
             </td>
-
-
         </tr>
-        <%
-                }
-            }
-        %>
+    </c:forEach>
     </table>
 
     <%--div事先存在但被隐藏 --%>
@@ -116,7 +102,7 @@
 
 <style>
     body {
-        background-image: url("../images/5.jpg");
+        background-image: url("../../images/5.jpg");
         background-size: 100%;
         background-repeat: no-repeat;
         font-family: 宋体;

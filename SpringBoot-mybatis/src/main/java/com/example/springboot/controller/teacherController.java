@@ -1,11 +1,17 @@
 package com.example.springboot.controller;
 
-import com.example.springboot.db.model.StudentHomework;
-import com.example.springboot.db.service.HomeworkService;
-import com.example.springboot.db.service.StudentHomeworkService;
-import com.example.springboot.db.model.Student;
-import com.example.springboot.db.model.Homework;
-import com.example.springboot.db.service.StudentService;
+import com.example.springboot.model.StudentHomework;
+import com.example.springboot.service.HomeworkService;
+import com.example.springboot.service.StudentHomeworkService;
+import com.example.springboot.model.Student;
+import com.example.springboot.model.Homework;
+import com.example.springboot.service.StudentService;
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletException;
@@ -13,16 +19,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@RequestMapping("/TeacherJSP/")
-@RestController
-public class teacherController {
 
+@Controller
+public class teacherController {
+    @Autowired
     private final StudentHomeworkService studentHomeworkService;
+    @Autowired
     private final StudentService studentService;
+    @Autowired
     private final HomeworkService homeworkService;
 
     public teacherController(StudentHomeworkService studentHomeworkService, StudentService studentService, HomeworkService homeworkService) {
@@ -30,8 +37,10 @@ public class teacherController {
         this.studentService = studentService;
         this.homeworkService = homeworkService;
     }
-
-
+//    @RequestMapping(value = "index")
+//    public  String login(){
+//        return  "index";
+//    }
     /**
      * 添加学生
      * @param sh
@@ -91,14 +100,21 @@ public class teacherController {
     /**
      * 展示所有的学生作业
      */
+//    @RequestMapping("/readHomework")
+//    public void student(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        System.out.println("???????????");
+//        List<StudentHomework> list = studentHomeworkService.selectAll();
+//
+//        req.setAttribute("list",list);
+//
+//        req.getRequestDispatcher("/readHomework.jsp").forward(req,resp);
+//    }
     @RequestMapping("/readHomework")
-    public void student(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+    public String student(Model model) {
+        System.out.println("???????????");
         List<StudentHomework> list = studentHomeworkService.selectAll();
-
-        req.setAttribute("list",list);
-
-        req.getRequestDispatcher("/readHomework.jsp").forward(req,resp);
+        model.addAttribute("list",list);
+        return "/readHomework";
     }
 
 }

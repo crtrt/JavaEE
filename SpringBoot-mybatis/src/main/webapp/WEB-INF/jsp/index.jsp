@@ -15,8 +15,17 @@
 
   <div id="frame">
         <p style="font-size: 28px">作业管理系统</p>
-        <input type="button" id="t_btn_login" value="教师" onclick = "window.location.href = 'TeacherJSP/readHomework.jsp'"/>
-        <input type="button" id="s_btn_login" value="学生" onclick = "window.location.href = 'StudentJSP/subHomework.jsp'"/>
+
+          <form name="form1" action="" method="post" >
+              <p><label style="margin-top: 8px" class="label_input">账号</label><input style="margin-top: 8px" type="text" name="id" class="text_field"/></p>
+              <p><label class="label_input">密码</label><input type="text" name="psw" class="text_field"/></p>
+              <div id="control">
+                  <input type="submit" id="t_btn_login" value="教师登录" onclick = "form1.action='teacherLogin';form1.submit()"/>
+                  <input type="submit" id="s_btn_login" value="学生登录" onclick = "form1.action='studentLogin';form1.submit()"/>
+              </div>
+          </form>
+
+、
   </div>
 
   </body>
@@ -25,7 +34,7 @@
 
 <style>
   body {
-    background-image: url("images/6.jpg");;
+    background-image: url("../../images/6.jpg");;
     background-size: 100%;
     background-repeat: no-repeat;
       color: #1e704d;
@@ -77,5 +86,34 @@
     margin-right: 30px;
 
   }
+
+  form p > * {
+      display: inline-block;
+      vertical-align: middle;
+  }
+
+  .label_input {
+      font-size: 16px;
+      font-family: 宋体;
+      width: 80px;
+      height: 32px;
+      line-height: 28px;
+      text-align: center;
+      color: #1e704d;
+      background-color: #d5f1e5;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+  }
+
+
+  .text_field {
+      width: 278px;
+      height: 32px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border: 0;
+  }
+
+
 
 </style>

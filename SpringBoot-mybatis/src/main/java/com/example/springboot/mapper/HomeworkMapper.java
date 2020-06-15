@@ -1,12 +1,12 @@
-package com.example.springboot.db.mapper;
+package com.example.springboot.mapper;
 
-import com.example.springboot.db.model.Homework;
-import com.example.springboot.db.model.Student;
+import com.example.springboot.model.Homework;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
-
+@Mapper
 public interface HomeworkMapper {
 
 

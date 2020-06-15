@@ -1,51 +1,59 @@
 
 <%@ page import="java.util.List" %>
-
+<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
+<%@ page import="org.example.javaee.springmvc.model.Homework" %>
 <%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
-
-<%--
+<%@ page import="org.example.javaee.springmvc.bean.Beans" %><%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/8
-  Time: 10:46
+  Time: 10:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加学生</title>
+    <title>添加作业</title>
 </head>
 <body>
     <%@ include file="header.jsp" %>
-
     <div id="frame">
-        <form action="AddStudentServlet" method="post" >
-            <p><label style="margin-top: 8px" class="label_input">学生学号</label><input style="margin-top: 8px" type="text" name="id" class="text_field"/></p>
-            <p><label class="label_input">学生姓名</label><input type="text" name="name" class="text_field"/></p>
+        <form action="AddHomeworkServlet" method="post" >
+                <p><label style="margin-top: 8px" class="label_input">作业标题</label><input style="margin-top: 8px" type="text" name="title" class="text_field"/></p>
+                <p><label class="label_input">作业内容</label><input type="text" name="content" class="text_field"/></p>
+                <p><label class="label_input">作业总分</label><input type="text" name="total_score" class="text_field"/></p>
             <div id="control">
-                <input type="submit" id="btn" value="确认添加" />
-            </div>
+                    <input type="submit" id="btn" value="确认添加" />
+                </div>
         </form>
     </div>
 
-    <table style="margin-top: 250px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
+
+    <table style="margin-top: 280px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
         <tr align="center" bgcolor="#d5f1e5" height="40">
-            <td>学生学号</td>
-            <td>学生姓名</td>
+            <td>作业编号</td>
+            <td>作业标题</td>
+            <td>作业内容</td>
             <td>创建时间</td>
+            <td>总分</td>
         </tr>
         <%
-            List<Student> list = (List<Student>) request.getAttribute("list");
+            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
+            StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+
+            List<Homework> list = studentHomeworkJdbc.selectHomework();
 
             if(null == list || list.size() <= 0){
                 out.print("None data.");
             }else {
-                for (Student sh : list){
+                for (Homework sh : list){
         %>
         <tr align="center" bgcolor="white" height="30">
             <td><%=sh.getId()%></td>
-            <td><%=sh.getName()%></td>
+            <td><%=sh.getTitle()%></td>
+            <td><%=sh.getContent()%></td>
             <td><%=sh.getCreateTime()%></td>
+            <td><%=sh.getTotal_score()%></td>
         </tr>
         <%
                 }
@@ -53,13 +61,11 @@
         %>
     </table>
 
-
-
 </body>
 </html>
 <style>
     body {
-        background-image: url("../images/4.jpg");
+        background-image: url("../../images/2.jpg");
         background-size: 100%;
         background-repeat: no-repeat;
         font-family: 宋体;

@@ -1,13 +1,20 @@
-package com.example.springboot.db.mapper;
+package com.example.springboot.mapper;
 
-import com.example.springboot.db.model.Student;
+import com.example.springboot.model.Student;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+@Mapper
 public interface StudentMapper {
 
+    /*
+    学生登录
+     */
+    @Select("SELECT * FROM s_student where id=#{id} and psw=#{psw}" )
+    public  List<Student> studentLogin(Student sh);
 
     /*
     查看学生列表student
