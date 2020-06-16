@@ -8,10 +8,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div id="nav" >
     <ul class="list">
-        <li style="margin-left: 300px"><a   href="/WEB-INF/jsp/readHomework.jspp">查看作业</a></li>
-        <li><a href="/WEB-INF/jsp/addHomework.jsp">添加作业</a></li>
-        <li><a href="/WEB-INF/jsp/addStudent.jsp">添加学生</a></li>
-        <li><a href="../../index.jsp">返回首页</a></li>
+        <li style="margin-left: 300px"><a   href="/readHomework">查看作业</a></li>
+        <li><a href="/addHomework">添加作业</a></li>
+        <li><a href="/addStudent">添加学生</a></li>
+        <li><a href="/index">返回首页</a></li>
     </ul>
 </div>
 <style>

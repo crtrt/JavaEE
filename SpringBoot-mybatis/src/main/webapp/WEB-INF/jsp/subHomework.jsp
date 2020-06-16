@@ -1,10 +1,6 @@
 
-<%@ page import="java.util.List" %>
-<%@ page import="org.example.javaee.springmvc.model.Homework" %>
-<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.springmvc.model.Student" %>
-<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
-<%@ page import="org.example.javaee.springmvc.bean.Beans" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <%--
   Created by IntelliJ IDEA.
@@ -22,48 +18,30 @@
     %>
 </head>
 <body>
-<a href="../../index.jsp" style="color: #1e704d;float:right">返回首页</a>
+<a href="index" style="color: #1e704d;float:right">返回首页</a>
 <div id="frame">
-<%--    <form action="../SubmitHomeworkServlet" method="post" >--%>
         <form name="form1" action="" method="post" >
-       <%
-           AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
-           StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
-
-           List<Homework> homeworklist = studentHomeworkJdbc.selectHomework();
-           List<Student> studentlist = studentHomeworkJdbc.selectStudent();
-       %>
 
         <p><label style="margin-top: 20px" class="label_input">个人信息</label>
-            <select id="studentId" name="studentId" style="margin-top: 20px" class="select">
-                <%
-                    for (Student sh : studentlist){
-                %>
-                <option value="<%=sh.getId()%>">学号:<%=sh.getId()%>        姓名:<%=sh.getName()%></option>
-                <%
-                    }
-                %>
-            </select>
+
+            <p><label style="margin-top: 8px" class="label_input">学号</label><input readOnly="true" style="margin-top: 8px" type="text" name="student_id" class="text_field" value="${stuId}"/>  </p>
+
         </p>
         <p><label style="margin-top: 20px" class="label_input">选择作业</label>
-            <select  name="homeworkId" style="margin-top: 20px" class="select">
-                <%
-                     for (Homework sh : homeworklist){
-                 %>
-                <option value="<%=sh.getId()%>">作业<%=sh.getId()%>       题目:<%=sh.getTitle()%>       内容:<%=sh.getContent()%>         总分:<%=sh.getTotal_score()%></option>
-                <%
-                    }
-                %>
+            <select  name="homework_id" style="margin-top: 20px" class="select">
+
+            <c:forEach items="${list}" var="sh">
+                <option value="${sh.id}">作业${sh.id}       题目:${sh.title}       内容:${sh.content}         总分:${sh.total_score}</option>
+            </c:forEach>
+
              </select>
         </p>
-
-
-        <p><label style="margin-top: 20px" class="label_input">作业标题</label><input style="margin-top: 20px" type="text" name="homeworkTitle" class="text_field"/></p>
-        <p><label style="margin-top: 20px" class="label_input">作业内容</label><input style="margin-top: 20px" type="text" name="homeworkContent" class="text_field"/></p>
+        <p><label style="margin-top: 20px" class="label_input">作业标题</label><input style="margin-top: 20px" type="text" name="homework_title" class="text_field"/></p>
+        <p><label style="margin-top: 20px" class="label_input">作业内容</label><input style="margin-top: 20px" type="text" name="homework_content" class="text_field"/></p>
         <div id="control" >
 <%--            <input style="margin-top: 20px" type="submit" id="btn" value="确认" />--%>
             <input style="margin-top: 20px" class="btn" type="button" value="确认提交" type="submit" onclick="form1.action='SubmitHomeworkServlet';form1.submit();"/>
-            <input style="margin-top: 20px" class="btn" type="button" value="查询作业" type="submit" onclick="form1.action='selectMy.jsp';form1.submit();" />
+            <input style="margin-top: 20px" class="btn" type="button" value="查询作业" type="submit" onclick="form1.action='selectMy';form1.submit();" />
         </div>
     </form>
 
@@ -84,7 +62,7 @@ body {
 
 #frame {
     width: 800px;
-    height: 380px;
+    height: 420px;
     position: absolute;
     padding-top: 13px;
     left: 50%;
@@ -147,4 +125,5 @@ form p > * {
     color: #1e704d;
     padding: 0;
 }
+
 </style>

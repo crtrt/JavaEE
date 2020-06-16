@@ -2,16 +2,12 @@ package com.example.springboot.controller;
 
 import com.example.springboot.model.Student;
 import com.example.springboot.model.Teacher;
-import com.example.springboot.service.HomeworkService;
-import com.example.springboot.service.StudentHomeworkService;
-import com.example.springboot.service.StudentService;
-import com.example.springboot.service.TeacherService;
+import com.example.springboot.service.*;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.ComponentScans;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -65,11 +61,24 @@ public class loginController {
 
 
     @RequestMapping(value="/studentLogin", method = RequestMethod.POST)
-    public String studentLogin(@ModelAttribute Student s){
+    public String studentLogin(@ModelAttribute Student s, RedirectAttributes redirectAttributes){
 
+        System.out.println(studentService.studentLogin(s));
 
+        if(!studentService.studentLogin(s).isEmpty()){
 
-        return  "redirect:/readHomework";
+            System.out.println("login successfully");
+
+            redirectAttributes.addFlashAttribute("stuId", s.getId());
+
+            return  "redirect:/subHomework";
+        }else{
+
+            System.out.println("login fail");
+
+            return  "redirect:/index";
+        }
+
     }
 
 

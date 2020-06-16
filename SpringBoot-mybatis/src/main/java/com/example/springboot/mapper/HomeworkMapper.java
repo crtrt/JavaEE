@@ -1,6 +1,7 @@
 package com.example.springboot.mapper;
 
 import com.example.springboot.model.Homework;
+import com.example.springboot.model.Student;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -11,16 +12,16 @@ public interface HomeworkMapper {
 
 
     /*
-     查看老师布置的的作业Homework
+     查看老师布置的的所有作业Homework
       */
     @Select("SELECT * FROM s_homework")
-    public List<Homework> selectHomework();
+    List<Homework> selectHomework();
 
     /*
     添加作业Homework
     */
-    @Insert("INSERT INTO s_homework(id,title,content,create_time,total_score) VALUES (#{id},#{title},#{content},#{createTime},#{totalScore})")
-    public void addStudentHomework(Homework hw) ;
+    @Insert("INSERT INTO s_homework(id,title,content,create_time,total_score) VALUES (null,#{title},#{content},#{create_time},#{total_score})")
+    void addStudentHomework(Homework hw) ;
 
 
 }

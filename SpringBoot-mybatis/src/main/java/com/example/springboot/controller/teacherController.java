@@ -48,7 +48,7 @@ public class teacherController {
      */
 
     @RequestMapping(value = "AddStudentServlet",method = RequestMethod.POST)
-    public String addStudent(@RequestBody  Student sh){
+    public String addStudent(@ModelAttribute  Student sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
 
@@ -56,7 +56,7 @@ public class teacherController {
 
         studentService.addStudent(sh);
 
-        return null;
+        return  "redirect:/addStudent";
     }
 
     /**
@@ -66,7 +66,7 @@ public class teacherController {
      */
 
     @RequestMapping(value = "AddHomeworkServlet",method = RequestMethod.POST)
-    public  String addHomework(@RequestBody Homework sh){
+    public  String addHomework(@ModelAttribute Homework sh){
         //获取当前时间
         Timestamp now = new Timestamp(new Date().getTime());
 
@@ -74,49 +74,70 @@ public class teacherController {
 
         homeworkService.addStudentHomework(sh);
 
-        return null;
+        return  "redirect:/addHomework";
     }
 
-//    /**
-//     * 提交成绩，有问题
-//     * @param sh
-//     * @return
-//     */
-//    @RequestMapping(value = "SubmitScore",method = RequestMethod.POST)
-//    public  String updateHomework(@RequestBody  StudentHomework sh){
-//        //获取当前时间
-//        Timestamp now = new Timestamp(new Date().getTime());
-//
-//        sh.setSetScoreTime(now);
-//
-//       // studentHomeworkJdbc.submitScore(sh);
-//
-//        studentHomeworkService.getMapper().save(sh);
-//
-//        return null;
-//    }
+    /**
+     * 提交成绩
+     * @param sh
+     * @return
+     */
+    @RequestMapping(value = "SubmitScore",method = RequestMethod.POST)
+    public  String updateHomework(@ModelAttribute  StudentHomework sh){
+        //获取当前时间
+        Timestamp now = new Timestamp(new Date().getTime());
 
+        sh.setSet_score_time(now);
+
+        studentHomeworkService.submitScore(sh);
+
+        return  "redirect:/readHomework";
+    }
 
     /**
-     * 展示所有的学生作业
+     * 查看所有作业与答案
+     * @param model
+     * @return
      */
-//    @RequestMapping("/readHomework")
-//    public void student(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        System.out.println("???????????");
-//        List<StudentHomework> list = studentHomeworkService.selectAll();
-//
-//        req.setAttribute("list",list);
-//
-//        req.getRequestDispatcher("/readHomework.jsp").forward(req,resp);
-//    }
     @RequestMapping("/readHomework")
     public String student(Model model) {
 
         List<StudentHomework> list = studentHomeworkService.selectAll();
-        System.out.println("???????????");
-        System.out.println(list);
+
         model.addAttribute("list",list);
+
         return "/readHomework";
+    }
+
+    /**
+     * 查看所有老师发布的作业
+     * @param model
+     * @return
+     */
+    @RequestMapping("/addHomework")
+    public String selectHomework(Model model) {
+
+        List<Homework> list = homeworkService.selectHomework();
+
+        model.addAttribute("list",list);
+
+        return "/addHomework";
+    }
+
+
+    /**
+     * 查看所有学生
+     * @param model
+     * @return
+     */
+    @RequestMapping("/addStudent")
+    public String selectStudent(Model model) {
+
+        List<Student> list = studentService.selectStudent();
+
+        model.addAttribute("list",list);
+
+        return "/addStudent";
     }
 
 }

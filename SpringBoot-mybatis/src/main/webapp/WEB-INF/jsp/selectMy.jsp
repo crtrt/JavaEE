@@ -1,80 +1,61 @@
 
-<%@ page import="java.util.List" %>
-<%@ page import="java.sql.Timestamp" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.springmvc.model.StudentHomework" %>
-<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
-<%@ page import="org.example.javaee.springmvc.bean.Beans" %><%--
-  Created by IntelliJ IDEA.
-  User: enovo
-  Date: 2020/3/9
-  Time: 9:42
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--  Created by IntelliJ IDEA.--%>
+<%--  User: enovo--%>
+<%--  Date: 2020/3/9--%>
+<%--  Time: 9:42--%>
+<%--  To change this template use File | Settings | File Templates.--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>我的作业</title>
 </head>
 <body>
-<%String username=request.getParameter("studentId");%>
+<%String username=request.getParameter("student_id");%>
 <%
     out.print("当前学号:"+username);
 %>
-<a href="../../index.jsp" style="color: #1e704d;float:right">返回首页</a>
-<a href="subHomework.jsp" style="color: #1e704d;float:right;margin-right: 10px">返回上一页</a>
+<a href="/index" style="color: #1e704d;float:right">返回首页</a>
+<%--<a href="/subHomework?studentId=${sh.student_id}" style="color: #1e704d;float:right;margin-right: 10px">返回上一页</a>--%>
 <form name="form1" action="" method="post" >
-<table style="margin-top: 50px;color:#1e704d;font-family: 宋体; "  align="center" width="1200" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
-    <tr align="center" bgcolor="#d5f1e5"  height="40">
-        <td>选择</td>
-        <td>ID</td>
-        <td>学生学号</td>
-        <td>作业编号</td>
-        <td>作业标题</td>
-        <td>作业内容</td>
-        <td>创建时间</td>
-        <td>修改时间</td>
-        <td>操作</td>
-        <td>总成绩</td>
-        <td>得分</td>
-        <td>批改时间</td>
 
-    </tr>
-    <%
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
-        StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
+    <table style="margin-top: 50px;color:#1e704d;font-family: 宋体; "  align="center" width="1200" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
+        <tr align="center" bgcolor="#d5f1e5"  height="40">
+            <td>选择</td>
+            <td>ID</td>
+            <td>学生学号</td>
+            <td>作业编号</td>
+            <td>作业标题</td>
+            <td>作业内容</td>
+            <td>创建时间</td>
+            <td>修改时间</td>
+            <td>操作</td>
+            <td>总成绩</td>
+            <td>得分</td>
+            <td>批改时间</td>
 
-        List<StudentHomework> list = studentHomeworkJdbc.selectMy(Long.parseLong(request.getParameter("studentId")));
-//         List<StudentHomework> list = (List<StudentHomework>) request.getAttribute("list");
-        String title=request.getParameter("title");
+        </tr>
 
-        if(null == list || list.size() <= 0){
-            out.print("还未提交过作业！");
-        }else {
-            for (StudentHomework sh : list){
-    %>
-    <tr align="center" bgcolor="white" height="30">
-        <td><input type="checkbox" name="chk" id="chk" value=<%=sh.getId() %>></td>
-        <td><%=sh.getId()%></td>
-        <td><%=sh.getStudentId()%></td>
-        <td><%=sh.getHomeworkId()%></td>
-        <td><%=sh.getHomeworkTitle()%></td>
-        <td><%=sh.getHomeworkContent()%></td>
-        <td><%=sh.getCreateTime()%></td>
-        <td><%=sh.getUpdateTime()%></td>
-        <td><a href="update.jsp?id=<%=sh.getId()%>&studentId=<%=sh.getStudentId()%>&homeworkId=<%=sh.getHomeworkId()%>&homeworkTitle=<%=sh.getHomeworkTitle()%>&homeworkContent=<%=sh.getHomeworkContent()%>">修改</a></td>
-        <td><%=sh.getTotal_score()%></td>
-        <td><%=sh.getScore()%></td>
-        <td><%=sh.getSetScoreTime()%></td>
+        <c:forEach items="${list}" var="sh">
+            <tr align="center" bgcolor="white" height="30">
+                <td><input type="checkbox" name="chk" id="chk" value=${sh.id}></td>
 
-    </tr>
-    <%
+                <td>${sh.id}</td>
+                <td>${sh.student_id}</td>
+                <td>${sh.homework_id}</td>
+                <td>${sh.homework_title}</td>
+                <td>${sh.homework_content}</td>
+                <td>${sh.create_time}</td>
+                <td>${sh.update_time}</td>
+                <td><a href="update?id=${sh.id}&studentId=${sh.student_id}&homeworkId=${sh.homework_id}&homeworkTitle=${sh.homework_title}&homeworkContent=${sh.homework_content}">修改</a></td>
+                <td>${sh.total_score}</td>
+                <td>${sh.score}</td>
+                <td>${sh.set_score_time}</td>
 
-            }
-        }
-    %>
-</table>
+            </tr>
+        </c:forEach>
+    </table>
     <div id="control">
         <input style="margin-top: 20px;margin-left: 550px" class="btn" type="button" value="确认删除" onclick="form1.action='deleteServlet';form1.submit();"/>
 

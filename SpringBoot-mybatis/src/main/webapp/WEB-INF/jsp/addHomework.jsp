@@ -1,9 +1,6 @@
 
-<%@ page import="java.util.List" %>
-<%@ page import="org.example.javaee.springmvc.jdbc.StudentHomeworkJdbc" %>
-<%@ page import="org.example.javaee.springmvc.model.Homework" %>
-<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
-<%@ page import="org.example.javaee.springmvc.bean.Beans" %><%--
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%--
   Created by IntelliJ IDEA.
   User: enovo
   Date: 2020/3/8
@@ -29,7 +26,7 @@
     </div>
 
 
-    <table style="margin-top: 280px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
+    <table style="margin-top: 330px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
         <tr align="center" bgcolor="#d5f1e5" height="40">
             <td>作业编号</td>
             <td>作业标题</td>
@@ -37,28 +34,16 @@
             <td>创建时间</td>
             <td>总分</td>
         </tr>
-        <%
-            AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(Beans.class);
-            StudentHomeworkJdbc studentHomeworkJdbc=(StudentHomeworkJdbc) context.getBean("studentHomeworkJdbc");
 
-            List<Homework> list = studentHomeworkJdbc.selectHomework();
-
-            if(null == list || list.size() <= 0){
-                out.print("None data.");
-            }else {
-                for (Homework sh : list){
-        %>
+    <c:forEach items="${list}" var="sh">
         <tr align="center" bgcolor="white" height="30">
-            <td><%=sh.getId()%></td>
-            <td><%=sh.getTitle()%></td>
-            <td><%=sh.getContent()%></td>
-            <td><%=sh.getCreateTime()%></td>
-            <td><%=sh.getTotal_score()%></td>
+            <td>${sh.id}</td>
+            <td>${sh.title}</td>
+            <td>${sh.content}</td>
+            <td>${sh.create_time}</td>
+            <td>${sh.total_score}</td>
         </tr>
-        <%
-                }
-            }
-        %>
+    </c:forEach>
     </table>
 
 </body>

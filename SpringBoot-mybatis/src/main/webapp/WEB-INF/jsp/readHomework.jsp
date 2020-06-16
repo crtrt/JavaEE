@@ -1,6 +1,3 @@
-
-<%@ page import="java.util.List" %>
-<%@ page import="com.example.springboot.model.StudentHomework" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%--

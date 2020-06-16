@@ -1,6 +1,4 @@
-
-<%@ page import="java.util.List" %>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <%--
@@ -28,29 +26,19 @@
         </form>
     </div>
 
-    <table style="margin-top: 250px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
+    <table style="margin-top: 300px;color:#1e704d " align="center" width="800" border="0.8" bgcolor="#1e704d" cellpadding="1" cellspacing="1" >
         <tr align="center" bgcolor="#d5f1e5" height="40">
             <td>学生学号</td>
             <td>学生姓名</td>
             <td>创建时间</td>
         </tr>
-        <%
-            List<Student> list = (List<Student>) request.getAttribute("list");
-
-            if(null == list || list.size() <= 0){
-                out.print("None data.");
-            }else {
-                for (Student sh : list){
-        %>
+    <c:forEach items="${list}" var="sh">
         <tr align="center" bgcolor="white" height="30">
-            <td><%=sh.getId()%></td>
-            <td><%=sh.getName()%></td>
-            <td><%=sh.getCreateTime()%></td>
+            <td>${sh.id}</td>
+            <td>${sh.name}</td>
+            <td>${sh.create_time}</td>
         </tr>
-        <%
-                }
-            }
-        %>
+    </c:forEach>
     </table>
 
 

@@ -20,4 +20,6 @@ public class Homework {
     private Date create_time;
 
     private Date update_time;
+
+    private String total_score;
 }
